@@ -33,7 +33,8 @@ namespace testSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDBContent>(options => options.UseSqlServer(confString.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IAllCars,CarRepostory>();
+            services.AddTransient<IAllCars,CarRepository>();
+            services.AddTransient<IAllOrders, OrdersRepository>();
             services.AddTransient<ICarsCategory, CategoryRepository>();
             services.AddSingleton<IHttpContextAccessor,HttpContextAccessor> ();
             services.AddScoped(sp => ShopCart.GetCart(sp));
@@ -51,6 +52,11 @@ namespace testSite
             app.UseStaticFiles();
             app.UseSession();
             app.UseMvcWithDefaultRoute();
+            app.UseMvc(route => {
+                route.MapRoute("default", "{controller=Home}/{action = Index}/{id?}");
+                route.MapRoute("categoryFilter", "{controller=Car}/{action = List}/{category?}");
+           
+                });
             using (var scope = app.ApplicationServices.CreateScope())
             {
                AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();

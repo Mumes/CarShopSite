@@ -5,9 +5,9 @@
     {
     <div class="alert alert-warning mt-3">
         <b>Автомобиль: </b> @el.Car.Name <br />
-        <b>Wtyf: </b> @el.Car.Price.ToString("c") <br />
+        <b>Цена: </b> @el.Car.Price.ToString("c") <br />
     </div>
     }
     <hr />
-    <div class="btn btn-danger" asp-controller="Order"> Оплатить </div>
+    <a class="btn btn-danger" asp-controller="Order" asp-action="CheckOut"> Оплатить </a>
 </div>

@@ -19,7 +19,7 @@ namespace testSite.Controllers
             this.shopCart = shopCart;
             this.carRepository = carRepository;
         }
-
+        [Route("ShopCart")]
         public ViewResult Index()
         {
             var items = shopCart.GetShopItems();
@@ -30,6 +30,7 @@ namespace testSite.Controllers
             };
             return View(obj);
         }
+        [Route("ShopCart/AddToCart")]
         public RedirectToActionResult AddToCart(int id)
         {
             var item = carRepository.Cars.FirstOrDefault(i => i.ID == id);

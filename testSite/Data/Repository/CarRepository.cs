@@ -15,6 +15,7 @@ namespace testSite.Data.Repository
         public CarRepository(AppDBContent appDBContent)
         {
             this.appDBContent = appDBContent;
+           
         }
         public IEnumerable<Car> Cars => appDBContent.Car.Include(c=>c.Category);
 
